@@ -1,12 +1,17 @@
 
-import { CommunityController } from "../controller/communityController.js";
+import { communityRoutes } from './communities.routes.js';
+import { eventsRoutes } from './events.routes.js';
 
-const communityController = new CommunityController();
+
+
 
 export async function routes(fastify, options) {
 
-
-    fastify.get("/", (request, reply) => {
-        return reply.status(200).send({ msg: "Hello world" });
+    fastify.get('/', (request, reply) => {
+        return reply.send({ title: 'Hello Khodar ', message: 'Sejam bem vindos a sala mais cool!!!!!!' });
     });
+
+
+    fastify.register(communityRoutes, { prefix: '/communities' });
+    fastify.register(eventsRoutes, { prefix: '/events' });
 }

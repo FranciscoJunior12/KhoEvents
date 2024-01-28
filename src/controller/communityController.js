@@ -1,50 +1,48 @@
 
-import { CommunityRepository } from "../repositories/communityRepository.js";
+import { CommunityRepository } from "../repositories/CommunitiesRepository.js";
 
-const communityRepository = new CommunityRepository();
+
 
 
 export class CommunityController {
 
-    create(request, reply) {
+    repository = new CommunityRepository();
+
+    async create(request, reply) {
 
         const { name, email, password } = request.body;
 
-        const community = communityRepository.save({ name, email, password });
-
-        delete community.password;
+        const community = await this.repository.save({ name, email, password });
 
         return reply.status(201).send(community);
     }
 
-    show(request, reply) {
+    async list(request, reply) {
 
-        const communityList = communityRepository.list();
+        const { name } = request.query;
 
-        return reply.status(200).send(communityList)
+        const communities = await this.repository.list({ name });
 
-    }
-
-    update(request, reply) {
-
-        const { id } = request.params;
-        const { name, email, password } = request.body;
-
-        const updatedCommunity = communityRepository.update(id, { name, email, password });
-
-        return reply.status(200).send(updatedCommunity);
+        return reply.status(200).send(communities);
 
     }
 
-    delete(request, reply) {
+    async show(request, reply) {
 
         const { id } = request.params;
 
-        const deletedCommunity = communityRepository.destroy(id);
+        const community = await this.repository.getById({ id });
 
-        return reply.status(200).send(deletedCommunity)
+        if (!community) {
+            return reply.status(404).send({
+                mesage: "Community not found"
+            })
+        }
+
+        return reply.status(200).send(community);
+
 
     }
-
-
+    
 }
+

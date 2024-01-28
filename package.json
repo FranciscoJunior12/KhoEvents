@@ -12,9 +12,27 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fastify": "^4.25.2"
+    "@prisma/client": "^5.8.1",
+    "bcrypt": "^5.1.1",
+    "fastify": "^4.25.2",
+    
+    
+    "dayjs": "^1.11.10",
+    "dotenv": "^16.4.1",
+
+  
+
+    "@fastify/cookie": "^9.3.1",
+    "@fastify/multipart": "^8.1.0",
+
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.8",
+    "redis": "^4.6.12",
+    "zod": "^3.22.4"
+
   },
   "devDependencies": {
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "prisma": "^5.8.1"
   }
 }
