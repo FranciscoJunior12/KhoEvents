@@ -10,11 +10,16 @@ export class CommunityController {
 
     async create(request, reply) {
 
+
         const { name, email, password } = request.body;
 
-        const community = await this.repository.save({ name, email, password });
+        const communityExists = await this.repository.getByEmail(email);
 
-        return reply.status(201).send(community);
+        if (communityExists) return reply.status(400).send({ error: "community already exists" });
+
+        await this.repository.save({ name, email, password });
+
+        return reply.status(201).send();
     }
 
     async list(request, reply) {
@@ -43,6 +48,28 @@ export class CommunityController {
 
 
     }
-    
+    async update(request, reply) {
+
+
+        const { name, email, password, website, description, communityId } = request.body;
+
+        const communityExists = await this.repository.getByEmail(email);
+
+        if (communityExists) return reply.status(400).send({ error: "community already exists" });
+
+        await this.repository.update(communityId, { name, email, password, website, description })
+
+        return reply.status(200).send();
+    }
+
+    async updateAvatar(request, reply) {
+
+        const { communityId, avatar } = request.body;
+
+        await this.repository.update(communityId, { avatarId: avatar.id })
+
+        return reply.status(200).send();
+    }
+
 }
 

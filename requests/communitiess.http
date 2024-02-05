@@ -1,0 +1,16 @@
+###
+@url = http://localhost:3333/api/v1/communities
+
+PATCH {{url}}/avatar
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="communityId"
+
+58bd4512-826f-4608-891a-c9a4eb894e38
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="avatar"; filename="khodar.jpg"
+Content-Type: image/jpeg
+
+< ./images/khodar.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

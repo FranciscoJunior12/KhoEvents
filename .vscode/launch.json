@@ -6,12 +6,13 @@
     "configurations": [
         {
             "type": "node",
-            "request": "launch",
+            "request": "attach",
+            "restart": true,
             "name": "Launch Program",
             "skipFiles": [
                 "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}\\src\\repositories\\CommunitieRepository.js"
+            ]
+           
         }
     ]
 }

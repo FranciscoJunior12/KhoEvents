@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-// import { FileRepository } from '../repositories/FileRepository.js';
+
 import { FilesRepository } from '../repositories/FilesRepository.js';
 const filesRepository = new FilesRepository();
 
@@ -25,7 +25,6 @@ export function upload(field) {
 
         body[field] = savedFile;
         request.body = body;
-
-        await done();
+        return await done();
     };
 }
