@@ -43,4 +43,43 @@ export class EventRepository {
 
     }
 
+
+    async update(id, { title, description, date, status, startTime, endTime, limit, banner, communityId }) {
+
+
+        await this.client.update({
+
+            where: {
+                id
+            },
+            data: {
+                title,
+                description,
+                date,
+                startTime,
+                endTime,
+                limit,
+                banner,
+                communityId,
+                status
+            }
+
+        })
+
+
+    }
+
+
+    async getById({ eventId }) {
+
+        const event = await this.client.findUnique({
+            where: {
+                id: eventId
+            }
+        });
+
+        return event;
+
+    }
+
 }

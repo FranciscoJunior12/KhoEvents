@@ -41,4 +41,17 @@ export class EventController {
         return reply.status(200).send(events);
     }
 
+    async delete(request, reply) {
+
+        const { id } = request.params;
+
+        const event = await this.repository.getById({ eventId: id });
+
+        if (!event) return reply.status(204).send({ msg: "event not found" });
+
+        await this.repository.update(id, { status: "CANCELLED" })
+
+        return reply.status(200).send();
+    }
+
 }

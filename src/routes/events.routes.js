@@ -8,6 +8,7 @@ export async function eventsRoutes(fastify, options) {
 
 
     fastify.post('/', { preHandler: upload('banner') }, (request, reply) => eventController.create(request, reply))
-    fastify.get('/', (request, reply) => eventController.list(request, reply))
+    fastify.get('/', (request, reply) => eventController.list(request, reply));
+    fastify.delete('/:id', (request, reply) => eventController.delete(request, reply));
 }
 
