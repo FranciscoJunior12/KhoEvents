@@ -7,6 +7,7 @@ const eventController = new EventController();
 export async function eventsRoutes(fastify, options) {
 
 
-    fastify.post('/', { preHadler: upload('banner') }, (request, reply) => eventController.create(request, reply))
+    fastify.post('/', { preHandler: upload('banner') }, (request, reply) => eventController.create(request, reply))
+    fastify.get('/', (request, reply) => eventController.list(request, reply))
 }
 

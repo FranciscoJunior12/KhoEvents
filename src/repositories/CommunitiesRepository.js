@@ -93,7 +93,6 @@ export class CommunityRepository {
 
     }
 
-
     async update(id, { name, email, password, website, description, avatarId }) {
 
 
