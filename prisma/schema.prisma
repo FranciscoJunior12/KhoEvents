@@ -57,6 +57,20 @@ model Event {
   communityId String
   banner      File?      @relation(fields: [banner_id], references: [id])
   banner_id   String
+  Ticket      Ticket[]
 
   @@map("events")
+}
+
+model Ticket {
+  id            String   @id @default(uuid())
+  attendeeName  String   @db.VarChar(255)
+  attendeeEmail String   @unique @db.VarChar(255)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  event   Event  @relation(fields: [eventId], references: [id])
+  eventId String
+
+  @@map("tickets")
 }
