@@ -1,5 +1,6 @@
 
 import { CommunityController } from "../controller/communityController.js";
+import { auth } from "../hooks/auth.js";
 
 const communityController = new CommunityController();
 
@@ -15,7 +16,19 @@ export async function communityRoutes(fastify, options) {
 
     fastify.get("/:id", (request, reply) => communityController.show(request, reply));
 
+    fastify.register(authRoutes);
+
+
+}
+
+
+
+async function authRoutes(fastify) {
+    fastify.decorateRequest('communityId', '');
+    fastify.addHook('preHandler', auth);
+
     fastify.put("/", (request, reply) => communityController.update(request, reply));
 
     fastify.patch('/avatar', { preHandler: upload("avatar") }, (request, reply) => communityController.updateAvatar(request, reply));
+
 }
