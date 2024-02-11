@@ -31,8 +31,14 @@ export class SessionController {
         return reply.setCookie('auth', token, {
             maxAge: 60 * 60 * 24
         })
-            .send(community)
+            .send(community);
     }
 
 
+    async logout(request, reply) {
+
+        return reply.clearCookie('auth').status(204).send();
+
+
+    }
 }

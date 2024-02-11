@@ -10,7 +10,9 @@ const fastify = Fastify({
 })
 
 fastify.register(fastifyMultipart, { attachFieldsToBody: true });
+
 fastify.register(routes, { prefix: '/api/v1' });
+
 fastify.register(fastifyCookie, {
     secret: process.env.APP_SECRET,
     hook: 'onRequest',
