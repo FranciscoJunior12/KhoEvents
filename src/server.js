@@ -1,4 +1,4 @@
-
+import 'dotenv/config.js'
 import Fastify from 'fastify'
 import fastifyMultipart from '@fastify/multipart';
 import fastifyCookie from '@fastify/cookie';
@@ -21,7 +21,7 @@ fastify.register(fastifyCookie, {
         path: '/api/v1/'
     }
 
-})
+});
 
 
 fastify.listen({ port: 3333 }).then(() => {

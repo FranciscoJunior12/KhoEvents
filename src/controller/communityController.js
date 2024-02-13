@@ -1,7 +1,7 @@
 
 import { CommunityRepository } from "../repositories/CommunitiesRepository.js";
 
-
+import { sendMail } from '../lib/mail.js'
 
 
 export class CommunityController {
@@ -13,11 +13,24 @@ export class CommunityController {
 
         const { name, email, password } = request.body;
 
-        const communityExists = await this.repository.getByEmail(email);
+        // const communityExists = await this.repository.getByEmail(email);
 
-        if (communityExists) return reply.status(400).send({ error: "community already exists" });
+        // if (communityExists) return reply.status(400).send({ error: "community already exists" });
 
-        await this.repository.save({ name, email, password });
+        // await this.repository.save({ name, email, password });
+
+        try {
+            await sendMail({
+                subject: "verfique o seu email",
+                to: email,
+                text: `clique no link para verificar o seu email`
+
+            });
+
+        } catch (error) {
+
+            return reply.send({ error })
+        }
 
         return reply.status(201).send();
     }
