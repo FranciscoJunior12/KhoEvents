@@ -15,6 +15,7 @@ export async function communityRoutes(fastify, options) {
 
     fastify.get("/:id", (request, reply) => communityController.show(request, reply));
     fastify.patch("/verify/:token", (request, reply) => communityController.verify(request, reply));
+    fastify.patch("/reset-password/:token", (request, reply) => communityController.resetPassword(request, reply));
 
     fastify.register(authRoutes);
 

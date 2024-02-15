@@ -1,7 +1,10 @@
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
+import {randomUUID} from 'crypto'
 
 import { CommunityRepository } from "../repositories/CommunitiesRepository.js"
+import { redis } from "../database/redis.js";
+import { sendMail } from "../lib/mail.js";
 
 export class SessionController {
 
@@ -41,4 +44,31 @@ export class SessionController {
 
 
     }
-}
+
+    async resetPassword(request, reply) {
+
+        const { email } = request.body;
+
+        const resetToken = randomUUID();
+        await redis.set(`reset_password_${resetToken}`, email, 1800);
+        const resetLink = `http://localhost:3333/api/v1/communities/reset-password/${resetToken}`
+
+        try {
+
+            await sendMail({
+                subject: "Reset Password",
+                to: email,
+                text: `clique no <a href="${resetLink}">link </a>para fazer reset da sua password`
+
+            });
+
+            return reply.status(204).send();
+
+        } catch (error) {
+
+            return reply.send({ error })
+        }
+
+
+    }
+}   

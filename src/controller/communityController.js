@@ -108,5 +108,27 @@ export class CommunityController {
         return reply.status(204).send();
 
     }
+
+    async resetPassword(request, reply) {
+
+        const { token } = request.params;
+        const { password } = request.body;
+
+        const email = await redis.get(`reset_password_${token}`);
+
+        const community = await this.repository.getByEmail(email);
+
+        if (!community) return reply.status(403).send("community does not exist");
+
+        await this.repository.updatePassword(community.id, password);
+
+        await redis.delete(`reset_password_${token}`);
+
+        return reply.status(204).send();
+
+    }
+
+
+
 }
 

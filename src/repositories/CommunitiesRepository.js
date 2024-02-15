@@ -7,8 +7,15 @@ import { prisma } from "../database/index.js";
 export class CommunityRepository {
     client = prisma.community;
 
-    async save({ name, email, password }) {
+    async hashPassword(password) {
+
         const passwordHash = await bcrypt.hash(password, 10);
+        return passwordHash;
+    }
+
+
+    async save({ name, email, password }) {
+        const passwordHash = await this.hashPassword(password);
         const community = await this.client.create({
             data: {
                 name,
@@ -93,7 +100,25 @@ export class CommunityRepository {
 
     }
 
-    async update(id, { name, email, password, verified, website, description, avatarId }) {
+    async updatePassword(id, password) {
+
+        const passwordHash = await this.hashPassword(password);
+
+        await this.client.update({
+
+            where: {
+                id
+            },
+            data: {
+                password: passwordHash
+            }
+
+        });
+
+
+    }
+
+    async update(id, { name, email, verified, website, description, avatarId }) {
 
 
         await this.client.update({
@@ -104,14 +129,13 @@ export class CommunityRepository {
             data: {
                 name,
                 email,
-                password,
                 website,
                 description,
                 verified,
                 avatar_id: avatarId
             }
 
-        })
+        });
 
 
     }
