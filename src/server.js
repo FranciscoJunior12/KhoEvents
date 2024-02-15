@@ -2,9 +2,11 @@ import 'dotenv/config.js'
 import Fastify from 'fastify'
 import fastifyMultipart from '@fastify/multipart';
 import fastifyCookie from '@fastify/cookie';
+import { ZodError } from 'zod'
 
 import { routes } from "./routes/index.js"
 import { redis } from './database/redis.js'
+import { AppError } from './errors/AppError.js';
 
 const fastify = Fastify({
     logger: true
@@ -23,6 +25,28 @@ fastify.register(fastifyCookie, {
     }
 
 });
+
+
+
+
+fastify.setErrorHandler((error, request, reply) => {
+
+
+    if (error instanceof ZodError) {
+        return reply.status(400).send({
+            error: 'Validation error', message: error.issues
+        });
+    } else if (error instanceof AppError) {
+        return reply.status(error.statusCode).send({ error: error.error, message: error.message });
+    }
+
+    return reply.status(500).send(error);
+});
+
+
+
+
+
 
 
 fastify.listen({ port: 3333 }).then(() => {

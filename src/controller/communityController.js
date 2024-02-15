@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto'
+import { z } from 'zod'
 
 import { CommunityRepository } from "../repositories/CommunitiesRepository.js";
 import { sendMail } from '../lib/mail.js'
@@ -11,8 +12,13 @@ export class CommunityController {
 
     async create(request, reply) {
 
+        const BodySchema = z.object({
+            name: z.string(),
+            email: z.string().email({message:"Invalid email"}),
+            password: z.string().min(6, { message: 'Password must be 6 or more characters long' })
+        }) 
 
-        const { name, email, password } = request.body;
+        const { name, email, password } = BodySchema.parse(request.body);
 
         const communityExists = await this.repository.getByEmail(email);
 
