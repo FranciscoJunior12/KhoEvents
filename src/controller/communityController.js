@@ -1,6 +1,6 @@
+import { randomUUID } from 'crypto'
 
 import { CommunityRepository } from "../repositories/CommunitiesRepository.js";
-
 import { sendMail } from '../lib/mail.js'
 
 
@@ -19,11 +19,12 @@ export class CommunityController {
 
         // await this.repository.save({ name, email, password });
 
+        const verifyToken = randomUUID();
         try {
             await sendMail({
                 subject: "verfique o seu email",
                 to: email,
-                text: `clique no link para verificar o seu email`
+                text: `clique no <a href="http://localhost:3333/api/v1/communities/verify/${verifyToken}">link </a>para verificar o seu email`
 
             });
 
