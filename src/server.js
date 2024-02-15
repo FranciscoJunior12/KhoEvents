@@ -34,7 +34,9 @@ fastify.setErrorHandler((error, request, reply) => {
 
     if (error instanceof ZodError) {
         return reply.status(400).send({
-            error: 'Validation error', message: error.issues
+            error: 'Validation error', message: error.issues.map((erro) => {
+                return erro.message
+            })
         });
     } else if (error instanceof AppError) {
         return reply.status(error.statusCode).send({ error: error.error, message: error.message });
