@@ -2,6 +2,7 @@ import { randomUUID } from 'crypto'
 
 import { CommunityRepository } from "../repositories/CommunitiesRepository.js";
 import { sendMail } from '../lib/mail.js'
+import { redis } from '../database/redis.js';
 
 
 export class CommunityController {
@@ -13,14 +14,17 @@ export class CommunityController {
 
         const { name, email, password } = request.body;
 
-        // const communityExists = await this.repository.getByEmail(email);
+        const communityExists = await this.repository.getByEmail(email);
 
-        // if (communityExists) return reply.status(400).send({ error: "community already exists" });
+        if (communityExists) return reply.status(400).send({ error: "community already exists" });
 
-        // await this.repository.save({ name, email, password });
+        const { id } = await this.repository.save({ name, email, password });
 
         const verifyToken = randomUUID();
+        await redis.set(`verify_${verifyToken}`, id, 1800);
+
         try {
+
             await sendMail({
                 subject: "verfique o seu email",
                 to: email,
@@ -34,7 +38,11 @@ export class CommunityController {
         }
 
         return reply.status(201).send();
+
     }
+
+
+
 
     async list(request, reply) {
 
@@ -85,5 +93,20 @@ export class CommunityController {
         return reply.status(200).send();
     }
 
+
+
+    async verify(request, reply) {
+
+        const { token } = request.params;
+
+        const communityId = await redis.get(`verify_${token}`);
+
+        await this.repository.update(communityId, { verified: true });
+
+        await redis.delete(`verify_${token}`);
+
+        return reply.status(204).send();
+
+    }
 }
 

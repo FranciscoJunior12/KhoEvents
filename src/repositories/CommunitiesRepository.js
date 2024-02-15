@@ -93,7 +93,7 @@ export class CommunityRepository {
 
     }
 
-    async update(id, { name, email, password, website, description, avatarId }) {
+    async update(id, { name, email, password, verified, website, description, avatarId }) {
 
 
         await this.client.update({
@@ -107,6 +107,7 @@ export class CommunityRepository {
                 password,
                 website,
                 description,
+                verified,
                 avatar_id: avatarId
             }
 

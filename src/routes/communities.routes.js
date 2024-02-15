@@ -1,5 +1,5 @@
 
-import { CommunityController } from "../controller/communityController.js";
+import { CommunityController } from "../controller/CommunityController.js";
 import { auth } from "../hooks/auth.js";
 
 const communityController = new CommunityController();
@@ -14,6 +14,7 @@ export async function communityRoutes(fastify, options) {
     fastify.get("/", (request, reply) => communityController.list(request, reply));
 
     fastify.get("/:id", (request, reply) => communityController.show(request, reply));
+    fastify.patch("/verify/:token", (request, reply) => communityController.verify(request, reply));
 
     fastify.register(authRoutes);
 

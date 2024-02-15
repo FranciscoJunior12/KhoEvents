@@ -4,6 +4,7 @@ import fastifyMultipart from '@fastify/multipart';
 import fastifyCookie from '@fastify/cookie';
 
 import { routes } from "./routes/index.js"
+import { redis } from './database/redis.js'
 
 const fastify = Fastify({
     logger: true
