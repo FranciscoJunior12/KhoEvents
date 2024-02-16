@@ -4,6 +4,8 @@ import { z } from 'zod'
 import { CommunityRepository } from "../repositories/CommunitiesRepository.js";
 import { sendMail } from '../lib/mail.js'
 import { redis } from '../database/redis.js';
+import { AppError } from '../errors/AppError.js';
+import { error } from 'console';
 
 
 export class CommunityController {
@@ -13,16 +15,16 @@ export class CommunityController {
     async create(request, reply) {
 
         const BodySchema = z.object({
-            name: z.string(),
-            email: z.string().email({message:"Invalid email"}),
+            name: z.string().min(3, { message: 'Name must be 3 or more characters long ' }),
+            email: z.string().email({ message: "Invalid email" }),
             password: z.string().min(6, { message: 'Password must be 6 or more characters long' })
-        }) 
+        });
 
         const { name, email, password } = BodySchema.parse(request.body);
 
         const communityExists = await this.repository.getByEmail(email);
 
-        if (communityExists) return reply.status(400).send({ error: "community already exists" });
+        if (communityExists) throw new AppError("Community creation", 'email already registed', 403);
 
         const { id } = await this.repository.save({ name, email, password });
 
@@ -66,11 +68,7 @@ export class CommunityController {
 
         const community = await this.repository.getById({ id });
 
-        if (!community) {
-            return reply.status(404).send({
-                mesage: "Community not found"
-            })
-        }
+        if (!community) throw new AppError("Not Found", "Community not found", 404)
 
         return reply.status(200).send(community);
 
@@ -79,13 +77,14 @@ export class CommunityController {
     async update(request, reply) {
 
 
+
         const { name, email, password, website, description, communityId } = request.body;
 
-        const communityExists = await this.repository.getByEmail(email);
+        // const communityExists = await this.repository.getByEmail(email);
 
-        if (communityExists) return reply.status(400).send({ error: "community already exists" });
+        // if (communityExists) return reply.status(400).send({ error: "community already exists" });
 
-        await this.repository.update(communityId, { name, email, password, website, description })
+        await this.repository.update(communityId, { name, email, website, description })
 
         return reply.status(200).send();
     }
@@ -123,8 +122,6 @@ export class CommunityController {
         const email = await redis.get(`reset_password_${token}`);
 
         const community = await this.repository.getByEmail(email);
-
-        if (!community) return reply.status(403).send("community does not exist");
 
         await this.repository.updatePassword(community.id, password);
 

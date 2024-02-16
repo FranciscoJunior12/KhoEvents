@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import { parseTimeToDate } from '../utils/dates.js'
 
 import { EventRepository } from "../repositories/EventsRepository.js";
+import { AppError } from "../errors/AppError.js";
 
 export class EventController {
 
@@ -16,7 +17,7 @@ export class EventController {
         const parsedStartTime = parseTimeToDate(startTime);
         const parsedEndTime = parseTimeToDate(endTime);
 
-        if (dayjs(parsedEndTime).isBefore(dayjs(parsedStartTime))) return reply.status(400).send({ error: 'Invalid time' });
+        if (dayjs(parsedEndTime).isBefore(dayjs(parsedStartTime))) throw new AppError('Invalid time', 'endTime can not be before startTime', 400);
 
         await this.repository.save({
             title,
@@ -47,7 +48,7 @@ export class EventController {
 
         const event = await this.repository.getById({ eventId: id });
 
-        if (!event) return reply.status(204).send({ msg: "event not found" });
+        if (!event) throw new AppError("Not found", "event not found", 404);
 
         await this.repository.update(id, { status: "CANCELLED" })
 

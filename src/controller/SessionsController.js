@@ -1,10 +1,11 @@
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
-import {randomUUID} from 'crypto'
+import { randomUUID } from 'crypto'
 
 import { CommunityRepository } from "../repositories/CommunitiesRepository.js"
 import { redis } from "../database/redis.js";
 import { sendMail } from "../lib/mail.js";
+import { AppError } from "../errors/AppError.js";
 
 export class SessionController {
 
@@ -16,9 +17,9 @@ export class SessionController {
         const { email, password } = request.body
         const community = await this.repository.getByEmail(email, { password: true });
 
-        if (!community) return reply.status(400).send({ msg: "Authentication falied" });
+        if (!community) throw new AppError("Authentication falied", "email or password invalid", 401);
 
-        if (!(await bcrypt.compare(password, community.password))) return reply.status(400).send({ msg: "email or password invalid" });
+        if (!(await bcrypt.compare(password, community.password)))  throw new AppError("Authentication falied", "email or password invalid", 401);
 
         delete community.password;
 
@@ -48,6 +49,10 @@ export class SessionController {
     async resetPassword(request, reply) {
 
         const { email } = request.body;
+
+        const community = await this.repository.getByEmail(email);
+
+        if (!community) throw new AppError("Not found", "community does not exist", 403);
 
         const resetToken = randomUUID();
         await redis.set(`reset_password_${resetToken}`, email, 1800);

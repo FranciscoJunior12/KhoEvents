@@ -1,3 +1,4 @@
+import { AppError } from "../errors/AppError.js";
 import { TicketsRepository } from "../repositories/TicketsRepository.js";
 
 
@@ -12,7 +13,7 @@ export class TicketController {
         const ticketExists = await this.repository.getByEmail({ attendeeEmail });
 
 
-        if (ticketExists) return reply.status(200).send({ msg: "User email already register on this event!" })
+        if (ticketExists) throw new AppError("Registation failed", "User email already register on this event!", 401);
 
 
         await this.repository.create({ attendeeName, attendeeEmail, eventId });

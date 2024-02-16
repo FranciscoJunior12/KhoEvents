@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { AppError } from "../errors/AppError.js";
 
 export function auth(request, reply, done) {
 
@@ -8,11 +9,12 @@ export function auth(request, reply, done) {
     try {
 
         var { id } = jwt.verify(token, process.env.APP_SECRET);
-        request.communityId = id;
+
+        request.body.communityId = id;
 
     } catch (error) {
 
-        return reply.status(401).send({ error: "invalid token or expired", msg: "Login required" });
+        throw new AppError("invalid token or expired", "Login required", 401);
 
     }
 
