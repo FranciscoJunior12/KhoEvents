@@ -9,4 +9,4 @@ const StartScreen = () => {
     )
 }
 
-export default StartScreen
+export default StartScreen;

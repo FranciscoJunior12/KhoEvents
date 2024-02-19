@@ -1,6 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import './Logo.css'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Logo.css';
 const Logo = () => {
     return (
         <a className="Logo" to="/home">
@@ -11,4 +11,4 @@ const Logo = () => {
     )
 }
 
-export default Logo
+export default Logo;
