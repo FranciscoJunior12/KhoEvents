@@ -8,7 +8,7 @@ function App() {
 
   const { data: status, error } = useFetch('status');
 
-  console.log(error)
+ 
   return (
     <>
       <div id="api-status" className={status ? 'running' : ''}></div>

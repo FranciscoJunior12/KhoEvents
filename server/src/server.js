@@ -13,7 +13,7 @@ const fastify = Fastify({
 });
 
 await fastify.register(cors, {
-    origin:'http://localhost:5173',
+    origin: process.env.WEB_URL,
     credentials: true
 });
 
