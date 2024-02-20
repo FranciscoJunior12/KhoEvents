@@ -4,6 +4,7 @@ import Message from '../../assets/Message.png';
 import Logo from '../../components/Logo/Logo';
 import Input from '../../components/input/Input';
 import './Login.css'
+import { Link } from 'react-router-dom';
 // import Input from '../../components/Input/Input';
 
 const Login = () => {
@@ -25,9 +26,9 @@ const Login = () => {
                 <input type="submit" value="Entrar" className="Submeter"  />
                 <p className="ContaCriar">
                     Não tens uma conta😥?
-                    <a to="/signup" className="Inscrever">
+                    <Link to="/signup" className="Inscrever">
                         Cadastrar
-                    </a>
+                    </Link>
                 </p>
             </form>
         </div>

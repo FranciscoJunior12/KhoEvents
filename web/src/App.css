@@ -6,3 +6,12 @@
 body {
   background: #101010;
 }
+
+#api-status {
+  height: 8px;
+  background: red;
+}
+
+#api-status.running {
+  background: green;
+}

@@ -9,8 +9,8 @@ import { ticketsRoutes } from './tickets.routes.js';
 
 export async function routes(fastify, options) {
 
-    fastify.get('/', (request, reply) => {
-        return reply.send({ title: 'Hello Khodar ', message: 'Sejam bem vindos a sala mais cool!!!!!!' });
+    fastify.get('/status', (request, reply) => {
+        return reply.send({ Ok: true });
     });
 
 

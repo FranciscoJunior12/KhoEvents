@@ -3,14 +3,19 @@ import Fastify from 'fastify'
 import fastifyMultipart from '@fastify/multipart';
 import fastifyCookie from '@fastify/cookie';
 import { ZodError } from 'zod'
-
+import cors from '@fastify/cors'
 import { routes } from "./routes/index.js"
 import { redis } from './database/redis.js'
 import { AppError } from './errors/AppError.js';
 
 const fastify = Fastify({
     logger: true
-})
+});
+
+await fastify.register(cors, {
+    origin:'http://localhost:5173',
+    credentials: true
+});
 
 fastify.register(fastifyMultipart, { attachFieldsToBody: true });
 
