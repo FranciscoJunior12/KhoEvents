@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Logo from '../../components/Logo/Logo'
 import './StartScreen.css'
-const StartScreen = () => {
+import { useNavigate } from 'react-router-dom'
+
+export const StartScreen = () => {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+
+        setTimeout(() => {
+            navigate('/login');
+        }, 1500);
+
+    }, []);
+
     return (
         <div className='StartScreen'>
             <Logo />
@@ -9,4 +22,3 @@ const StartScreen = () => {
     )
 }
 
-export default StartScreen;

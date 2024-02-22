@@ -7,7 +7,7 @@ import './Login.css'
 import { Link } from 'react-router-dom';
 // import Input from '../../components/Input/Input';
 
-const Login = () => {
+export const Login = () => {
     return (
         <div className="Login">
             <Logo />
@@ -23,7 +23,7 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
 
-                <input type="submit" value="Entrar" className="Submeter"  />
+                <input type="submit" value="Entrar" className="Submeter" />
                 <p className="ContaCriar">
                     Não tens uma conta😥?
                     <Link to="/signup" className="Inscrever">
@@ -34,5 +34,3 @@ const Login = () => {
         </div>
     )
 }
-
-export default Login;

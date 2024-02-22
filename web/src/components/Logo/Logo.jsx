@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Logo.css';
-const Logo = () => {
+const Logo = ({ to }) => {
     return (
-        <a className="Logo" to="/home">
+        <Link className="Logo" to={to}>
             <h1>
                 <span>Kho</span>Event
             </h1>
-        </a>
+        </Link>
     )
 }
 
