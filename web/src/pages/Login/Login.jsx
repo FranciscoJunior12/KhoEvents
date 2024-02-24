@@ -1,13 +1,32 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import Lock from '../../assets/Lock.png';
 import Message from '../../assets/Message.png';
 import Logo from '../../components/Logo/Logo';
 import Input from '../../components/input/Input';
 import './Login.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/auth.jsx';
 // import Input from '../../components/Input/Input';
 
 export const Login = () => {
+
+    const [email, setEmail] = useState('');
+    const [passsword, setPassword] = useState('');
+    const { login } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+
+        login(email, passsword).then((response) => {
+            console.log(response);
+            if (!response.error) {
+                navigate("/home")
+            }
+        })
+
+    }
+
     return (
         <div className="Login">
             <Logo />
@@ -23,7 +42,7 @@ export const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
 
-                <input type="submit" value="Entrar" className="Submeter" />
+                <input type="submit" value="Entrar" className="Submeter" onClick={handleLogin} />
                 <p className="ContaCriar">
                     Não tens uma conta😥?
                     <Link to="/signup" className="Inscrever">

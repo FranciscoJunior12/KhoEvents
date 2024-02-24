@@ -7,7 +7,7 @@ const Input = ({ name, label, icon, ...props }) => {
             <label htmlFor={name}>
                 <img src={icon} alt={`Ícone de ${label}`} />
             </label>
-            <input id={name} placeholder={label} {...props} />
+            <input id={name} placeholder={label} {...props}  />
 
         </div>
     )

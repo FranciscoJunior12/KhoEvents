@@ -13,6 +13,8 @@ function App() {
   return (
 
     <AuthProvider>
+
+      {/* <div id="api-status" className={status ? 'running' : ''}></div> */}
       <Router />
     </AuthProvider>
 
@@ -20,3 +22,4 @@ function App() {
 }
 
 export default App;
+  
