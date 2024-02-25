@@ -9,8 +9,8 @@ import { RouterProvider } from 'react-router-dom';
 
 export function Router() {
   const { signed } = useContext(AuthContext);
-  const context = useContext(AuthContext);
-  console.log(context);
+
+
 
   if (signed) {
     return <RouterProvider router={globalRouter} />;

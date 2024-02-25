@@ -17,7 +17,7 @@ function App() {
       {/* <div id="api-status" className={status ? 'running' : ''}></div> */}
       <Router />
     </AuthProvider>
-
+ 
   )
 }
 
