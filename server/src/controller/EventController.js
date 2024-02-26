@@ -12,7 +12,7 @@ export class EventController {
 
     async create(request, reply) {
 
-        const { title, description, date, startTime, endTime, limit, banner, communityId } = request.body;
+        const { title, description, date, local, startTime, endTime, limit, banner, communityId } = request.body;
 
         const parsedStartTime = parseTimeToDate(startTime);
         const parsedEndTime = parseTimeToDate(endTime);
@@ -25,6 +25,7 @@ export class EventController {
             date,
             startTime,
             endTime,
+            local,
             limit,
             bannerId: banner.id,
             communityId
@@ -54,5 +55,19 @@ export class EventController {
 
         return reply.status(200).send();
     }
+
+    async getById(request, reply) {
+
+        const { id } = request.params;
+
+        const event = await this.repository.getById({ eventId: id })
+
+        if (!event) throw new AppError("Not found", "event not found", 404);
+
+
+        return reply.status(200).send(event);
+
+    }
+
 
 }

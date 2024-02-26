@@ -5,7 +5,7 @@ export class EventRepository {
 
     client = prisma.event;
 
-    async save({ title, description, date, startTime, endTime, limit, bannerId, communityId }) {
+    async save({ title, description, date, startTime, endTime,local, limit, bannerId, communityId }) {
 
         const event = await this.client.create({
 
@@ -17,7 +17,9 @@ export class EventRepository {
                 endTime,
                 limit: Number(limit),
                 banner_id: bannerId,
-                communityId
+                communityId,
+
+
             }
         })
 
@@ -44,7 +46,7 @@ export class EventRepository {
     }
 
 
-    async update(id, { title, description, date, status, startTime, endTime, limit, banner, communityId }) {
+    async update(id, { title, description, date, status, local,startTime, endTime, limit, banner, communityId }) {
 
 
         await this.client.update({
@@ -61,7 +63,8 @@ export class EventRepository {
                 limit,
                 banner,
                 communityId,
-                status
+                status,
+                local
             }
 
         })

@@ -6,6 +6,7 @@ const eventController = new EventController();
 export async function eventsRoutes(fastify, options) {
 
     fastify.get('/', (request, reply) => eventController.list(request, reply));
+    fastify.get('/:id', (request, reply) => eventController.getById(request, reply));
     fastify.register(authRoutes)
     
 }

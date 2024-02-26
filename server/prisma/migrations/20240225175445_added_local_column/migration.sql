@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "events" ADD COLUMN     "local" VARCHAR(255) NOT NULL DEFAULT 'UEM FENG';

@@ -92,11 +92,11 @@ export const Home = () => {
                         <h2>Próximos Eventos</h2>
                         <section className="BoxEventos">
 
-                            {console.log(events)}
+
                             {
                                 events ? events.map((event) => {
                                     return (
-                                        <Link key={event.id} className="BoxEventoConteudo" to={`/events/${event.id}`}>
+                                        <Link key={event.id} className="BoxEventoConteudo" to={`/events?q=${event.id}`}>
                                             <div className="overlay">
                                                 <p className="NomeComunidade">MOZDEV</p>
                                                 <img className="ImagemEvento" src={DataWave2} alt="Icone Evento" />
@@ -105,13 +105,13 @@ export const Home = () => {
                                                     <p className="DataHora">
                                                         {new Date(event.date).toLocaleDateString('pt-MZ')} | {event.startTime} - {event.endTime}
                                                     </p>
-                                                    <p className="LocalEvento">UEM-FENG</p>
+                                                    <p className="LocalEvento">{event.local}</p>
                                                 </article>
                                             </div>
                                         </Link>
                                     )
 
-                                }) : ''}
+                                }) : <h1>Carregando eventos...</h1>}
 
                         </section>
                     </div>
