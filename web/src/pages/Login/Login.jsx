@@ -9,6 +9,7 @@ import Logo from '../../components/Logo/Logo';
 import Input from '../../components/input/Input';
 import './Login.css'
 import { AuthContext } from '../../contexts/auth.jsx';
+import { NotificationContext } from '../../contexts/notification.jsx';
 
 
 export const Login = () => {
@@ -16,35 +17,16 @@ export const Login = () => {
     const [email, setEmail] = useState('');
     const [passsword, setPassword] = useState('');
     const { login } = useContext(AuthContext);
+    const { notify } = useContext(NotificationContext);
     const navigate = useNavigate();
 
 
-    const notify = (message, error = true) => {
-        if (error) {
 
-            return toast.error(message, {
-                position: "top-center",
-                autoClose: 3500,
-                pauseOnHover: false,
-                theme: "dark",
-
-            });
-
-        }
-       
-        toast.success(message, {
-            position: "top-center",
-            autoClose: 3500,
-            pauseOnHover: false,
-            theme: "dark",
-
-        });
-
-
-    }
 
     const handleLogin = (e) => {
         e.preventDefault();
+
+        if (!email || !passsword) return notify("Preencha todos os campos!", true);
 
         login(email, passsword)
             .then((response) => {
@@ -52,7 +34,7 @@ export const Login = () => {
                     return navigate("/home")
                 }
 
-                notify("E-mail ou senha inválidos.", false)
+                notify("E-mail ou senha inválidos.", true);
             })
 
     }

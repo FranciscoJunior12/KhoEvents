@@ -1,5 +1,6 @@
 import { createContext, useState, useContext, useEffect } from 'react';
-import { post } from '../services/api';
+import { deleteRequest, post } from '../services/api';
+import { toast } from 'react-toastify';
 
 export const AuthContext = createContext({});
 
@@ -20,10 +21,20 @@ export function AuthProvider({ children }) {
         return response;
     }
 
+    async function logout() {
+        const response = await deleteRequest('/sessions');
+
+        if (!response.error) {
+            setUser(null);
+        } else {
+            alert('Falha no logout');
+        }
+        return response;
+    }
 
 
     return (
-        <AuthContext.Provider value={{ login, user, signed: Boolean(user) }}>
+        <AuthContext.Provider value={{ login, logout, user, signed: Boolean(user) }}>
             {children}
         </AuthContext.Provider>
     );

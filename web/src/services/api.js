@@ -44,3 +44,20 @@ export async function post(url, data) {
 
   return response;
 }
+
+
+export async function deleteRequest(url) {
+  const response = {
+    data: null,
+    error: null
+  };
+
+  try {
+    const res = await api.delete(url);
+    response.data = res.data;
+  } catch (error) {
+    response.error = error;
+  }
+
+  return response;
+}
