@@ -10,7 +10,7 @@ export const StartScreen = () => {
     useEffect(() => {
 
         setTimeout(() => {
-            navigate('/login');
+            navigate('/home');
         }, 1500);
 
     }, []);

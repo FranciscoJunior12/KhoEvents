@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
         if (!response.error) {
             setUser(response.data);
         } else {
-            alert('Falha na autenticação');
+            console.log('Falha na autenticação');
         }
         return response;
     }
