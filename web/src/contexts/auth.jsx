@@ -1,11 +1,12 @@
 import { createContext, useState, useContext, useEffect } from 'react';
 import { deleteRequest, post } from '../services/api';
-import { toast } from 'react-toastify';
+
 
 export const AuthContext = createContext({});
 
 
 export function AuthProvider({ children }) {
+    const [mailToSendLink, setMailToSendLink] = useState('');
 
     const [user, setUser] = useState(null);
 
@@ -34,7 +35,7 @@ export function AuthProvider({ children }) {
 
 
     return (
-        <AuthContext.Provider value={{ login, logout, user, signed: Boolean(user) }}>
+        <AuthContext.Provider value={{ login, logout, user, mailToSendLink, setMailToSendLink, signed: Boolean(user) }}>
             {children}
         </AuthContext.Provider>
     );

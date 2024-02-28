@@ -34,9 +34,9 @@ export class CommunityController {
         try {
 
             await sendMail({
-                subject: "verfique o seu email",
+                subject: "Verificação de email",
                 to: email,
-                text: `clique no <a href="http://localhost:3333/api/v1/communities/verify/${verifyToken}">link </a>para verificar o seu email`
+                text: `clique no <a href="${process.env.VERIFIED_ACCOUNT_URL}verify/${verifyToken}">link </a>para completar seu cadastro.`
 
             });
 
@@ -48,7 +48,6 @@ export class CommunityController {
         return reply.status(201).send();
 
     }
-
 
 
 
@@ -132,6 +131,34 @@ export class CommunityController {
     }
 
 
+    async resendEmail(request, reply) {
+
+
+        const { email } = request.body;
+
+        const community = await this.repository.getByEmail(email);
+
+        if (!community) throw new AppError("faild to resend link", 'email not registed', 403);
+
+        const verifyToken = randomUUID();
+
+        await redis.set(`verify_${verifyToken}`, community.id, 1800);
+
+        try {
+
+            await sendMail({
+                subject: "verfique o seu email",
+                to: email,
+                text: `clique no <a href="${process.env.VERIFIED_ACCOUNT_URL}verify/${verifyToken}">link </a>para verificar o seu email`
+
+            });
+
+            return reply.status(204).send();
+        } catch {
+            return reply.send({ error })
+        }
+
+    }
 
 }
 

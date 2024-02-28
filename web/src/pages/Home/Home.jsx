@@ -44,7 +44,7 @@ export const Home = () => {
                     </>
                 ) : (
                     <>
-                        <a to="#">Criar conta</a>
+                        <Link to="/signup">Criar conta</Link>
                         <Link to="/login">Login</Link>
                     </>
                 )}

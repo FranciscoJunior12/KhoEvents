@@ -11,7 +11,7 @@ export const StartScreen = () => {
 
         setTimeout(() => {
             navigate('/home');
-        }, 1500);
+        }, 2500);
 
     }, []);
 

@@ -37,9 +37,11 @@ export async function post(url, data) {
 
   try {
     const res = await api.post(url, data);
+
     response.data = res.data;
   } catch (error) {
     response.error = error;
+
   }
 
   return response;
@@ -54,6 +56,22 @@ export async function deleteRequest(url) {
 
   try {
     const res = await api.delete(url);
+    response.data = res.data;
+  } catch (error) {
+    response.error = error;
+  }
+
+  return response;
+}
+
+export async function pacthRequeste(url) {
+  const response = {
+    data: null,
+    error: null
+  };
+
+  try {
+    const res = await api.patch(url, {});
     response.data = res.data;
   } catch (error) {
     response.error = error;

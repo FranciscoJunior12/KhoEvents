@@ -3,6 +3,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Login } from '../pages/Login/Login.jsx'
 import { globalRoutes } from './global.routes.jsx'
 import { SignUp } from '../pages/SignUp/SignUp.jsx';
+import { VerifyEmail } from '../pages/VerifyEmail/VerifyEmail.jsx';
+import { EmailVerified } from '../pages/EmailVerified/EmailVerified.jsx';
 
 
 
@@ -15,6 +17,14 @@ export const openRoutes = [
     {
         path: "/signup",
         element: <SignUp />
+    },
+    {
+        path: "/verificar-email",
+        element: <VerifyEmail />
+    },
+    {
+        path: "/verify/:id",
+        element: <EmailVerified />
     }
 
 ]

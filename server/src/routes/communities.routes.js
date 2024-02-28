@@ -10,6 +10,7 @@ export async function communityRoutes(fastify, options) {
 
 
     fastify.post('/', (request, reply) => communityController.create(request, reply));
+    fastify.post('/send-email', (request, reply) => communityController.resendEmail(request, reply));
 
     fastify.get("/", (request, reply) => communityController.list(request, reply));
 
