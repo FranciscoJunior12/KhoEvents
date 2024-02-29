@@ -26,6 +26,9 @@ export const SignUp = () => {
     const [confirmePassword, setConfirmePassword] = useState('');
     const navigate = useNavigate();
 
+    const [loading, setLoading] = useState(false);
+    const [cadastrar, setCadastrar] = useState("Cadastrar");
+
     const { notify } = useContext(NotificationContext);
     const { setMailToSendLink } = useContext(AuthContext);
 
@@ -34,6 +37,7 @@ export const SignUp = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+
         if (!name || !email || !password || !confirmePassword) return notify('Preencha todos os campos', true);
 
         if (password.length < 6) return notify('Senha deve ter mais de 6 caracteres.', true);
@@ -41,17 +45,33 @@ export const SignUp = () => {
 
         if (password !== confirmePassword) return notify('As senhas não correspondem.', true);
 
+        setLoading(true)
+        setCadastrar('')
         post('/communities', { name, email, password })
-            .then((response) => {
-
-                if (!response.error) {
-
-                    return navigate('/verificar-email');
+        .then((response) => {
+            
+            if (!response.error) {
+                setLoading(false)
+                
+                return navigate('/verificar-email');
+                
+            }
+            
+            if (response.error.response.status === 403) {
+                setLoading(false)
+                setCadastrar('Cadastrar')
+                return notify('E-mail já existe.');
+            }
+            if (response.error.response.status === 400) {
+                setLoading(false)
+                setCadastrar('Cadastrar')
+                return notify('E-mail inválido.')
+            }
+            if (response.error.response.status === 500) {
+                setLoading(false)
+                setCadastrar('Cadastrar')
+                    return notify('Falha no servidor, tente novamente mais tarde.')
                 }
-
-                if (response.error.response.status === 403) return notify('E-mail já existe.');
-                if (response.error.response.status === 400) return notify('E-mail inválido.')
-                if (response.error.response.status === 500) return notify('Falha no servidor, tente novamente mais tarde.')
             })
 
 
@@ -94,7 +114,13 @@ export const SignUp = () => {
                     onChange={(e) => setConfirmePassword(e.target.value)}
                 />
 
-                <input type="submit" value="Cadastrar" className="Submeter" onClick={handleSubmit} />
+                <button type="submit" value="Cadastrar" className={`Submeter ${loading ? 'loading' : ''}`} onClick={handleSubmit}>
+                    {cadastrar}
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
 
                 <p className="ContaCriar">
                     Já tem uma comunidade😁?

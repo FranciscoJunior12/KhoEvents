@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
-.SignUp{
-    padding: 50px 30px 30px 30px ;
+.SignUp {
+    padding: 50px 30px 30px 30px;
 }
 
-.SignUp>.Logo{
+.SignUp>.Logo {
     display: none;
 }
-.EntrarTitulo{
+
+.EntrarTitulo {
     width: max-content;
     font-family: 'Poppins', sans-serif;
     color: white;
@@ -18,21 +19,23 @@
     margin-bottom: 20px;
 
 }
-form{
+
+form {
     max-width: 300px;
     margin: auto;
 }
-form>a:hover{
+
+form>a:hover {
     cursor: pointer;
 }
 
 
-.Submeter{
+.Submeter {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     display: block;
     width: 250px;
-    height: 45px ;
+    height: 45px;
     margin: auto;
     background-color: #00C54E;
     border: none;
@@ -42,11 +45,13 @@ form>a:hover{
     background-position: 85%;
     font-size: 16px;
 }
-.Submeter:hover{
+
+.Submeter:hover {
     background-color: #01ee60;
     cursor: pointer;
 }
-.ContaCriar{
+
+.ContaCriar {
     font-family: 'Poppins', sans-serif;
     color: white;
     font-size: 13px;
@@ -54,24 +59,78 @@ form>a:hover{
     text-align: center;
     margin-top: 30px;
 }
-.Inscrever{
+
+.Inscrever {
     color: #04a042;
     text-decoration: none;
 
 }
-.Inscrever:hover{
+
+.Inscrever:hover {
     color: #01ee60;
     cursor: pointer;
 }
 
+.loading {
+    background-image: none;
+    background-color: #0e582c;
+    cursor: none;
+}
 
-@media(min-width:1024px){
-    .SignUp{
-        padding: 0;
-       display: flex;
-       width: 100%;
+.loading:hover {
+
+    background-color: #0e582c;
+    cursor: progress;
+}
+
+.loading span {
+
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #01ee60;
+    margin: 8px;
+}
+
+
+.loading span {
+    animation: bounce .6s cubic-bezier(0.6, 0.1, 1, 0.4);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.loading span:nth-child(1) {
+    animation-delay: .1s;
+}
+
+.loading span:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.loading span:nth-child(3) {
+    animation-delay: .3s;
+}
+
+@keyframes bounce {
+
+    to {
+        transform: translateY(15px);
     }
-    .SignUp>.Logo{
+}
+
+
+
+
+
+@media(min-width:1024px) {
+    .SignUp {
+        padding: 0;
+        display: flex;
+        width: 100%;
+    }
+
+    .SignUp>.Logo {
         display: block;
         width: 40vw;
         height: 100vh;
@@ -79,16 +138,18 @@ form>a:hover{
         margin: 0;
         width: 50vw;
     }
-    .SignUp>.Logo>h1{
+
+    .SignUp>.Logo>h1 {
         width: max-content;
         position: relative;
         top: 50%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         font-size: 70px;
 
     }
-    form{
+
+    form {
         display: flex;
         flex-direction: column;
         gap: 5px;
