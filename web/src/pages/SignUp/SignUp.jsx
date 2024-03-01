@@ -37,6 +37,9 @@ export const SignUp = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if (loading) {
+            return
+        }
 
         if (!name || !email || !password || !confirmePassword) return notify('Preencha todos os campos', true);
 
@@ -46,31 +49,31 @@ export const SignUp = () => {
         if (password !== confirmePassword) return notify('As senhas não correspondem.', true);
 
         setLoading(true)
-        setCadastrar('')
+        setCadastrar('Aguarde...')
         post('/communities', { name, email, password })
-        .then((response) => {
-            
-            if (!response.error) {
-                setLoading(false)
-                
-                return navigate('/verificar-email');
-                
-            }
-            
-            if (response.error.response.status === 403) {
-                setLoading(false)
-                setCadastrar('Cadastrar')
-                return notify('E-mail já existe.');
-            }
-            if (response.error.response.status === 400) {
-                setLoading(false)
-                setCadastrar('Cadastrar')
-                return notify('E-mail inválido.')
-            }
-            if (response.error.response.status === 500) {
-                setLoading(false)
-                setCadastrar('Cadastrar')
-                    return notify('Falha no servidor, tente novamente mais tarde.')
+            .then((response) => {
+
+                if (!response.error) {
+                    setLoading(false)
+
+                    return navigate('/verificar-email');
+
+                }
+
+                if (response.error.response.status === 403) {
+                    setLoading(false)
+                    setCadastrar('Cadastrar')
+                    return notify('E-mail já existe.');
+                }
+                if (response.error.response.status === 400) {
+                    setLoading(false)
+                    setCadastrar('Cadastrar')
+                    return notify('E-mail inválido.')
+                }
+                if (response.error.response.status === 500) {
+                    setLoading(false)
+                    setCadastrar('Cadastrar')
+                    return notify('Falha no servidor, tente novamente mais tarde.');
                 }
             })
 
@@ -114,7 +117,7 @@ export const SignUp = () => {
                     onChange={(e) => setConfirmePassword(e.target.value)}
                 />
 
-                <button type="submit" value="Cadastrar" className={`Submeter ${loading ? 'loading' : ''}`} onClick={handleSubmit}>
+                <button className={`Submeter ${loading ? 'waiting' : ''}`} onClick={handleSubmit}>
                     {cadastrar}
                     <span></span>
                     <span></span>

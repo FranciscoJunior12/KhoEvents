@@ -71,57 +71,16 @@ form>a:hover {
     cursor: pointer;
 }
 
-.loading {
+.waiting {
     background-image: none;
-    background-color: #0e582c;
-    cursor: none;
+    background-color: #04a042;
 }
 
-.loading:hover {
-
-    background-color: #0e582c;
+.waiting:hover {
+    
+    background-color: #04a042;
     cursor: progress;
 }
-
-.loading span {
-
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #01ee60;
-    margin: 8px;
-}
-
-
-.loading span {
-    animation: bounce .6s cubic-bezier(0.6, 0.1, 1, 0.4);
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-.loading span:nth-child(1) {
-    animation-delay: .1s;
-}
-
-.loading span:nth-child(2) {
-    animation-delay: .2s;
-}
-
-.loading span:nth-child(3) {
-    animation-delay: .3s;
-}
-
-@keyframes bounce {
-
-    to {
-        transform: translateY(15px);
-    }
-}
-
-
-
-
 
 @media(min-width:1024px) {
     .SignUp {

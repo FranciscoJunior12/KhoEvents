@@ -11,13 +11,14 @@ export const StartScreen = () => {
 
         setTimeout(() => {
             navigate('/home');
-        }, 2500);
+        }, 3500);
 
     }, []);
 
     return (
         <div className='StartScreen'>
-            <Logo />
+            <Logo loading={true} />
+            
         </div>
     )
 }
