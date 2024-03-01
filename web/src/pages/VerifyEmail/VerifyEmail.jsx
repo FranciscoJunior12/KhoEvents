@@ -1,20 +1,31 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import emailIcon from '../../assets/email.png'
 
 import './VerifyEmail.css'
 import { AuthContext } from '../../contexts/auth'
 import { post } from '../../services/api'
 import { NotificationContext } from '../../contexts/notification'
+import { ToastContainer } from 'react-toastify'
 
 export const VerifyEmail = () => {
 
     const { mailToSendLink } = useContext(AuthContext);
     const { notify } = useContext(NotificationContext)
+    const [buttonText, setButtonText] = useState('Reenviar email');
+    const [loading, setLoading] = useState(false);
 
     const resendLink = () => {
 
+        if (loading) {
+            return
+        }
+        setLoading(true)
+        setButtonText('Aguarde..')
+
         post('communities/send-email', { email: mailToSendLink })
             .then(() => {
+                setButtonText('Reenviar email');
+                setLoading(false)
                 notify('Link reenviado com sucesso!', false)
             });
     }
@@ -38,17 +49,17 @@ export const VerifyEmail = () => {
                     <button
                         style={{ backgroundImage: 'none' }}
                         type='submit'
-                        className='Submeter '
+                        className={`Submeter ${loading ? 'waiting' : ''}`}
                         onClick={resendLink}
                     >
 
-                        Reenviar email
+                        {buttonText}
                     </button>
 
                 </div>
             </div>
 
-
+            <ToastContainer />
         </div >
     )
 }

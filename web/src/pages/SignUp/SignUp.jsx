@@ -52,11 +52,11 @@ export const SignUp = () => {
         setCadastrar('Aguarde...')
         post('/communities', { name, email, password })
             .then((response) => {
-
+                setLoading(false)
                 if (!response.error) {
                     setLoading(false)
 
-                    return navigate('/verificar-email');
+                    return navigate('/verify-email');
 
                 }
 

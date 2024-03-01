@@ -19,7 +19,7 @@ export const openRoutes = [
         element: <SignUp />
     },
     {
-        path: "/verificar-email",
+        path: "/verify-email",
         element: <VerifyEmail />
     },
     {

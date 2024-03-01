@@ -104,6 +104,8 @@ export class CommunityController {
         const { token } = request.params;
 
         const communityId = await redis.get(`verify_${token}`);
+        console.log(communityId);
+        if (!communityId) return new AppError('invalid token', 'Invalid verify token inalid or expired', 403);
 
         await this.repository.update(communityId, { verified: true });
 
