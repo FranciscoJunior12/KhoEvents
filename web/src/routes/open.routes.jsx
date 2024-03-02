@@ -5,6 +5,7 @@ import { globalRoutes } from './global.routes.jsx'
 import { SignUp } from '../pages/SignUp/SignUp.jsx';
 import { VerifyEmail } from '../pages/VerifyEmail/VerifyEmail.jsx';
 import { EmailVerified } from '../pages/EmailVerified/EmailVerified.jsx';
+import { EventSignUp } from '../pages/EventSignUp/EventSignUp.jsx';
 
 
 
@@ -25,6 +26,10 @@ export const openRoutes = [
     {
         path: "/verify/:id",
         element: <EmailVerified />
+    },
+    {
+        path: "/events-signup",
+        element: <EventSignUp />
     }
 
 ]

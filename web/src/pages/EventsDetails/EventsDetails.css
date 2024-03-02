@@ -1,55 +1,63 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
-.DetalhesEvento{
-font-family: 'Poppins', sans-serif;
+.DetalhesEvento {
+    font-family: 'Poppins', sans-serif;
 }
 
-.BoxConteudoEvento>.overlay{
+.BoxConteudoEvento>.overlay {
     width: 100%;
     height: max-content;
     position: relative;
-    
+
 }
-.ImagemVoltar{
+
+.ImagemVoltar {
     position: absolute;
     z-index: 2233;
     left: 20px;
     top: 30px;
 }
-.BoxConteudoEvento>.overlay::before{
-content: "";
-position: absolute;
-width: 100%;
-height: 100%;
-background-image: linear-gradient(rgba(255, 0, 0, 0), black);
-z-index: 122;
-top: 0;
-left: 0;
+
+.BoxConteudoEvento>.overlay::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(255, 0, 0, 0), black);
+    z-index: 122;
+    top: 0;
+    left: 0;
 }
 
 
 
-.BoxConteudoEvento>.overlay>img{
+.BoxConteudoEvento>.overlay>img {
     width: 100%;
 }
-.OverviewEvento>article{
+
+.OverviewEvento>article {
     color: white;
     position: absolute;
     z-index: 200;
     margin-top: -90px;
     left: 20px;
 }
-.NomeEvento{
+
+.NomeEvento {
     font-size: 24px;
     margin-bottom: 5px;
 }
-.DataEvento, .LocalEvento{
+
+.DataEvento,
+.LocalEvento {
     font-size: 11px;
 }
-.OverviewEvento{
+
+.OverviewEvento {
     display: flex;
 }
-.BotaoInscrever{
+
+.BotaoInscrever {
     width: 50px;
     height: 40px;
     background-color: #00C54E;
@@ -62,21 +70,24 @@ left: 0;
     color: white;
     font-size: 20px;
 }
-.BotaoInscrever:hover{
+
+.BotaoInscrever:hover {
     background-color: #01f362;
     cursor: pointer;
 }
-.Descricao{
-    color:white;
+
+.Descricao {
+    color: white;
     margin-left: 20px;
 }
-#DescricaoTitulo{
+
+#DescricaoTitulo {
     margin-top: 20px;
     margin-bottom: 10px;
 }
 
-@media(min-width:700px){
-    .BoxConteudoEvento{
+@media(min-width:700px) {
+    .BoxConteudoEvento {
         width: 600px;
         margin: auto;
     }

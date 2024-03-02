@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto'
 import { z } from 'zod'
 
 import { CommunityRepository } from "../repositories/CommunitiesRepository.js";
-import { sendMail } from '../lib/mail.js'
+import { send } from '../lib/mail.js'
 import { redis } from '../database/redis.js';
 import { AppError } from '../errors/AppError.js';
 import { error } from 'console';
@@ -39,6 +39,12 @@ export class CommunityController {
                 text: `clique no <a href="${process.env.VERIFIED_ACCOUNT_URL}verify/${verifyToken}">link </a>para completar seu cadastro.`
 
             });
+            
+            // console.log(email)
+            // send(
+            //     email,
+            //     'Verificação de mail',
+            //     'Olá Francisco,  clique no link para completar o seu registro');
 
         } catch (error) {
 

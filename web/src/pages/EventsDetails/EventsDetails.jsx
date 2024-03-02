@@ -4,6 +4,7 @@ import axios from 'axios';
 import Back from '../../assets/Back.png';
 import DataWave from '../../assets/DataWave.png';
 import './EventsDetails.css';
+import { EventSignUp } from '../EventSignUp/EventSignUp';
 
 export const EventsDetails = () => {
     const [event, setEvent] = useState({});
@@ -26,29 +27,34 @@ export const EventsDetails = () => {
     }, [query, url]);
 
     return (
-        <div className="DetalhesEvento">
-            <Link to="/home">
-                <img className="ImagemVoltar" src={Back} alt="Ícone Voltar" />
-            </Link>
-            <section className="BoxConteudoEvento">
-                <div className="overlay">
-                    <img src={DataWave} alt="Imagem do evento" />
-                    <section className="OverviewEvento">
-                        <article>
-                            <h2 className="NomeEvento">{event.title}</h2>
-                            <p className="DataEvento">Data: {new Date(event.date).toLocaleDateString('pt-MZ')} | Hora: {event.startTime} - {event.endTime}</p>
-                            <p className="LocalEvento">Local: {event.local}</p>
-                        </article>
-                        <button className="BotaoInscrever">+</button>
-                    </section>
-                </div>
-                <h2 className="Descricao" id="DescricaoTitulo">
-                    O que é {event.title}?
-                </h2>
-                <p className="Descricao">
-                    {event.description}
-                </p>
-            </section>
-        </div>
+        <>
+
+
+            <div className="DetalhesEvento">
+                <Link to="/home">
+                    <img className="ImagemVoltar" src={Back} alt="Ícone Voltar" />
+                </Link>
+                <section className="BoxConteudoEvento">
+                    <div className="overlay">
+
+                        <img src={DataWave} alt="Imagem do evento" />
+                        <section className="OverviewEvento">
+                            <article>
+                                <h2 className="NomeEvento">{event.title}</h2>
+                                <p className="DataEvento">Data: {new Date(event.date).toLocaleDateString('pt-MZ')} | Hora: {event.startTime} - {event.endTime}</p>
+                                <p className="LocalEvento">Local: {event.local}</p>
+                            </article>
+                            <button className="BotaoInscrever">+</button>
+                        </section>
+                    </div>
+                    <h2 className="Descricao" id="DescricaoTitulo">
+                        O que é {event.title}?
+                    </h2>
+                    <p className="Descricao">
+                        {event.description}
+                    </p>
+                </section>
+            </div>
+        </>
     );
 };
