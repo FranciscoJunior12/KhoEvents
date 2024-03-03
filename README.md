@@ -52,6 +52,8 @@ Esta app foi usada como exemplo para explicar sobre conceitos de desenvolvimento
 - [Prisma](https://www.prisma.io/)
 - [Redis](https://redis.io/docs/connect/clients/nodejs/)
 - [ReactJS](https://react.dev/)
+- [Docker](https://www.docker.com/)
+- [Postgres](https://www.postgres.org/)
 
 ## Como Contribuir
 
