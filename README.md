@@ -1,18 +1,3 @@
-# [Khoevents]
-
-## Table of Contents
-
-- [\[Khoevents\]](#khoevents)
-  - [Table of Contents](#table-of-contents)
-  - [Sobre o Khodar](#sobre-o-khodar)
-  - [Sobre o projeto](#sobre-o-projeto)
-    - [Funcionalidades principais](#funcionalidades-principais)
-    - [Tecnologias](#tecnologias)
-  - [Como Contribuir](#como-contribuir)
-    - [Reportar Problemas ou Sugestões](#reportar-problemas-ou-sugestões)
-    - [Contribuir com Código](#contribuir-com-código)
-  - [Licença📝](#licença)
-
 ## Sobre o Khodar
 
 O Khodar é uma incrível jornada de duas semanas, projetada para elevar suas habilidades em programação. Oferecemos duas trilhas simultâneas, escolha entre JavaScript ou Java e explore o vasto território do desenvolvimento Backend, Frontend e Mobile.✨
