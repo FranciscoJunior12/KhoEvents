@@ -29,7 +29,7 @@ export const Home = () => {
     }
 
     function handleLogout() {
-        logout();
+        logout(); 
     }
 
 
