@@ -1,8 +1,3 @@
-## Sobre o Khodar
-
-O Khodar é uma incrível jornada de duas semanas, projetada para elevar suas habilidades em programação. Oferecemos duas trilhas simultâneas, escolha entre JavaScript ou Java e explore o vasto território do desenvolvimento Backend, Frontend e Mobile.✨
-No Khodar, você irá aprimorar suas habilidades em design UI/UX, desenvolvimento backend (JavaScript ou Java/Spring), frontend com React JS e mobile no Android Studio. Aprenderá noções de ethical hacking para fortalecer a segurança dos sistemas. Transforme-se em apenas duas semanas! 🚀
-
 ## Sobre o projeto
 
 Este é o khoevents. Esta app serve para que comunidades possam publicar eventos sobre tecnologia e para que devs possam se registar para esses eventos.
