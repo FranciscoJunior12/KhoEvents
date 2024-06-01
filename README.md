@@ -1,7 +1,7 @@
 ## Sobre o projeto
 
 Este é o khoevents. Esta app serve para que comunidades possam publicar eventos sobre tecnologia e para que devs possam se registar para esses eventos.
-Esta app foi usada como exemplo para explicar sobre conceitos de desenvolvimento no Khodar, usando Javascript.
+Esta app foi usada como exemplo para explicar sobre conceitos de desenvolvimento de uma aplicação robusta no evento  Khodar que teve duração de duas semanas.
 
 ### Funcionalidades principais
 
